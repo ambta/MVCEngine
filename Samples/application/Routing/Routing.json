@@ -1,0 +1,26 @@
+{
+    "default":
+    {
+        "pattern":"/",
+        "controller":"SampleController",
+        "action":"default"
+    },
+    "welcome":
+        {
+            "pattern":"/welcome/{name}",
+            "controller":"SampleController",
+            "action":"welcome"
+        },
+    "contact":
+    {
+        "pattern":"/contact",
+        "controller":"SampleController",
+        "action":"contact"
+    },
+    "no_view_response":
+    {
+        "pattern":"/no/view/response",
+        "controller":"SampleController",
+        "action":"noViewResponse"
+    }
+}
