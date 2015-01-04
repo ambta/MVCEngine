@@ -1,6 +1,7 @@
 <?php
 /**
- * Your custom initializations above
+ * This is how the Engine and the application can be loaded from a php file.
+ * The initialization of can be done from any valid apache www file.
  */
 
 $engineRootLocation = (__DIR__).'/../../MVCEngine';
