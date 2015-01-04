@@ -26,7 +26,6 @@ use Ambta\Component\MVCEngine\Helper\Message\Error as ERROR;
  *
  * @package     Ambta\Component\MVCEngine
  * @version     0.0.1
- * @author      Lars van den Bosch <lars@ambta.com>
  * @copyright   (c) 2015 Ambta <https://www.ambta.com>
  */
 abstract class Kernel
@@ -469,6 +468,7 @@ abstract class Kernel
     {
         $data = array();
 
+        //Scan directory recursive, skip dots and use leaves only.
         $it = new \RecursiveDirectoryIterator($directory, \RecursiveDirectoryIterator::SKIP_DOTS);
         $itMode = (true === $includeEmptyDirs) ? \RecursiveIteratorIterator::SELF_FIRST : \RecursiveIteratorIterator::LEAVES_ONLY;
         foreach (new \RecursiveIteratorIterator($it, $itMode) as $filename => $file)
