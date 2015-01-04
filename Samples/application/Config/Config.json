@@ -2,7 +2,7 @@
     "application":
     {
         "root":"C:/xampp/htdocs/application",
-        "base_url":"http://127.0.0.1/ambta-mvcengine/Samples/application/",
+        "base_url":"http://127.0.0.1/MVCEngine/Samples/application/",
         "namespace":"\\MyCustomPrefix\\Application\\"
     },
     "security":
