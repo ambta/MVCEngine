@@ -67,6 +67,9 @@ abstract class Kernel
         'routing' => '/Routing',
     );
 
+    /* @var array */
+    public $extraApplicationDirectories = array();
+
     /* @var \Ambta\Component\MVCEngine\Kernel */
     private static $instance;
 
@@ -92,12 +95,18 @@ abstract class Kernel
      *
      * @author Lars van den Bosch <lars@ambta.com>
      * @param string $applicationRoot
+     * @param array $extraApplicationDirectories
      * @throws \Exception
      */
-    public function __construct($applicationRoot)
+    public function __construct($applicationRoot, $extraApplicationDirectories = array())
     {
         $this->applicationRoot = $applicationRoot;
         $this->engineRoot = (__DIR__);
+
+        if(true === is_array($extraApplicationDirectories))
+        {
+            $this->extraApplicationDirectories = $extraApplicationDirectories;
+        }
 
         if(true !== $this->isValidApplicationRoot())
         {
@@ -312,6 +321,15 @@ abstract class Kernel
             //Resources
             $this->applicationResources = $this->locateFilesFromDir($this->applicationRoot.$this->mvcRootDirectoryStructure['resources']);
 
+            //Extra directories
+            if(true === is_array($this->extraApplicationDirectories))
+            {
+                foreach($this->extraApplicationDirectories as $extraDir)
+                {
+                    $this->locateFilesFromDir($extraDir);
+                }
+            }
+
             return true;
         }catch(\Exception $e)
         {
@@ -454,6 +472,24 @@ abstract class Kernel
         {
             throw new \Exception($e->getMessage());
         }
+    }
+
+    /**
+     * Set extra application loading directories
+     *
+     * @author Lars van den Bosch <lars@ambta.com>
+     * @param array $extraApplicationDirectories
+     * @return bool
+     */
+    public function setExtraApplicationDirectories($extraApplicationDirectories = array())
+    {
+        if(true === is_array($extraApplicationDirectories))
+        {
+            $this->extraApplicationDirectories = $extraApplicationDirectories;
+            return true;
+        }
+
+        return false;
     }
 
     /**
