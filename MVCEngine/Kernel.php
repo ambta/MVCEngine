@@ -275,6 +275,15 @@ abstract class Kernel
     {
         try
         {
+            //Extra directories
+            if(true === is_array($this->extraApplicationDirectories))
+            {
+                foreach($this->extraApplicationDirectories as $extraDir)
+                {
+                    $this->locateFilesFromDir($extraDir);
+                }
+            }
+
             /**
             * Locate application required files
             */
@@ -320,15 +329,6 @@ abstract class Kernel
 
             //Resources
             $this->applicationResources = $this->locateFilesFromDir($this->applicationRoot.$this->mvcRootDirectoryStructure['resources']);
-
-            //Extra directories
-            if(true === is_array($this->extraApplicationDirectories))
-            {
-                foreach($this->extraApplicationDirectories as $extraDir)
-                {
-                    $this->locateFilesFromDir($extraDir);
-                }
-            }
 
             return true;
         }catch(\Exception $e)
