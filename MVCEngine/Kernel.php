@@ -280,7 +280,16 @@ abstract class Kernel
             {
                 foreach($this->extraApplicationDirectories as $extraDir)
                 {
-                    $this->locateFilesFromDir($extraDir);
+                    $extraFiles = $this->locateFilesFromDir($extraDir);
+                    foreach($extraFiles as $file)
+                    {
+                        $file = $file['path'].$file['name'];
+                        if(true !== file_exists($file))
+                        {
+                            return false;
+                        }
+                        require_once ($file);
+                    }
                 }
             }
 
